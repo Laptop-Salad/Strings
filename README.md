@@ -30,3 +30,5 @@ All calculations should be enclosed in brackets.
 - [x]  Nested math operations
 - [ ]  Variables
 - [ ]  Printing
+- [ ]  Loops
+- [ ]  Functions
