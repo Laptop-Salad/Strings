@@ -1,7 +1,7 @@
 # Interpreter for Stiallan
-from parser import ast
 from keys import operators
 
+variables = {}
 
 def interpret(ast):
     if ast[1] in operators:
@@ -59,14 +59,39 @@ def interpret(ast):
             while type(ast[pos]) == int or type(ast[pos]) == float:
                 if pos > 4:
                     print("ERROR cannot use MOD on a third number")
-                    break
+                    exit()
                 else:
                     holder_arr.append(ast[pos])
                     pos += 1
 
 
             return holder_arr[0] % holder_arr[1]
+    elif ast[1] == "DEC":
+        try:
+            if ast[2].isalpha() and ast[2] != "end":
+                variables[ast[2]] = "NULL"
+                if ast[3] == "AS":
+                    if type(ast[4]) == int:
+                        variables[ast[2]] = ast[4]
+                    else:
+                        print("ERROR expected variable name after AS but got", ast[4])
+                        exit()
+                else:
+                    print(ast[3])
+                    
+            else:
+                print("ERROR expected variable name after DECLARE but got", ast[2])
+                exit()
 
+            return variables[ast[2]]
+        except:
+            print("ERROR unexpected EOF")
+            exit()
+
+
+            
+        
+        
 def start_interpreter(ast):
     i = 0
     while i < len(ast):
@@ -78,8 +103,6 @@ def start_interpreter(ast):
 
     res = interpret(ast)
     return res
-
-print(start_interpreter(ast))
             
 
 

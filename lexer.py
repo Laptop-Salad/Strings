@@ -16,15 +16,13 @@ types = {
     "%" : "MODULO",
     "("     : "LBRACKET",
     ")"     : "RBRACKET",
+    "declare": "DEC",
+    "as": "AS",
 }
 
-# List for Tokens in source code
-sc_tokens = []
-
-code = input("> ")
-
-def tokenize():
+def tokenize(code):
     i = 0
+    sc_tokens = []
     while i < len(code):
         if code[i].isspace():
             i += 1
@@ -42,13 +40,23 @@ def tokenize():
                 i += 1
                 
             sc_tokens.append(Token("NUMBER", ''.join(holder), i))
+        elif code[i].isalpha():
+            holder = []
+            while code[i].isalpha():
+                holder.append(code[i])
+                i += 1
+            
+            joined = ''.join(holder)
+            if joined in types:
+                sc_tokens.append(Token(types[joined], joined, i))
+            else:
+                sc_tokens.append(Token("ALPHA", joined, i))
+            
         else:
-            print("Unexpected character", code[i])
-            exit()
+            sc_tokens.append(Token("unknown", code[i], i))
+            i += 1
+        
 
         
     sc_tokens.append(Token("EOF", "EOF", i))
     return sc_tokens
-
-
-sc_tokens = tokenize()

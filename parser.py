@@ -1,12 +1,7 @@
  # Stiallan Parser
-import lexer
 
 # TOKENS
 operator_tokens = ["PLUS", "MINUS", "MULTIPLY", "DIVIDE", "MODULO"]
-
-tokens = lexer.sc_tokens
-
-pos = 0
 
 def inner_bracket(pos, tokens, ast):
     holder = []
@@ -32,7 +27,7 @@ def inner_bracket(pos, tokens, ast):
     return pos, holder
 
 # Functions
-def bracket(pos):
+def bracket(pos, tokens):
     ast = []
     pos += 1
     ast.append("start")
@@ -50,15 +45,15 @@ def bracket(pos):
             result = inner_bracket(pos, tokens, ast)
             pos = result[0]
             ast.append(result[1])
+        elif tokens[pos].typ == "DEC":
+            ast.append(tokens[pos].typ)
+            pos += 1
+        elif tokens[pos].typ == "AS":
+            ast.append(tokens[pos].typ)
+            pos += 1
         else:
             ast.append(tokens[pos].text)
             pos += 1
             
 
     return ast
-    
-
-if tokens[pos].typ != "LBRACKET":
-    print("ERROR at position", pos, "expected ( but got", tokens[pos].text)
-else:
-    ast = bracket(pos)
