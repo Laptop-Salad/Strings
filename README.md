@@ -4,9 +4,9 @@ A toy programming language
 ## Syntax
 The syntax is similar to Lisp - Scheme but has its differences.
 
-### Math
+All code should be enclosed in brackets.
 
-All calculations should be enclosed in brackets.
+### Math
 ```
 (+ 5 5)
 ```
@@ -25,8 +25,24 @@ All calculations should be enclosed in brackets.
 (+ 5 (- 10 3))
 ```
 
+### Variables
+
+```
+(declare x as 5)
+(declare x as 6)
+```
+Set x as 5, then 6.
+
+#### Using Variables In Calculations
+```
+(declare x as 5)
+(+ x x)
+```
+Returns 10.
+
 ## Roadmap
 - [x]  Basic math operations
 - [x]  Nested math operations
-- [ ]  Variables
-- [ ]  Printing
+- [x]  Variables
+- [ ]  Loops
+- [ ]  Functions
