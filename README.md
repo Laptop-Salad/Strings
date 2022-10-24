@@ -28,15 +28,17 @@ All code should be enclosed in brackets.
 ### Variables
 
 ```
-(declare x as 5) # Set x as 5
-(declare x as 6) # Set x as 6
+(declare x as 5)
+(declare x as 6)
 ```
+Set x as 5, then 6.
 
 #### Using Variables In Calculations
 ```
 (declare x as 5)
-(+ x x) # Returns 10
+(+ x x)
 ```
+Returns 10.
 
 ## Roadmap
 - [x]  Basic math operations
