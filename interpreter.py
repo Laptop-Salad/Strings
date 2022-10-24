@@ -1,10 +1,25 @@
-# Interpreter for Stiallan
-from keys import operators
+### Interpreter for Stiallan
+from helpers import *
 
 variables = {}
 
+## Search through ast and replace variables with its values
+def lookup_vars(ast):
+    i = 0
+    while i < len(ast):
+        if ast[i] in variables:
+            ast[i] = variables[ast[i]]
+        i += 1
+
+    return ast
+
+## Interprets a single bracket
 def interpret(ast):
-    if ast[1] in operators:
+    ## For calculations
+    if ast[1] in operators
+        ast = lookup_vars(ast) # Check for variables
+
+        # Addition
         if ast[1] == "+":
             holder = 0
             pos = 2
@@ -16,8 +31,11 @@ def interpret(ast):
                     break
 
             return holder
-            
+
+        # Subtraction
         elif ast[1] == "-":
+            if ast[2] in variables:
+                ast[2] = variables[ast[2]]
             holder = ast[2]
             pos = 3
             while pos < len(ast):
@@ -29,7 +47,10 @@ def interpret(ast):
 
             return holder
 
+        # Division
         elif ast[1] == "/":
+            if ast[2] in variables:
+                ast[2] = variables[ast[2]]
             holder = ast[2]
             pos = 3
             while pos < len(ast):
@@ -41,7 +62,10 @@ def interpret(ast):
 
             return holder
 
+        # Multiplication
         elif ast[1] == "*":
+            if ast[2] in variables:
+                ast[2] = variables[ast[2]]
             holder = ast[2]
             pos = 3
             while pos < len(ast):
@@ -53,6 +77,7 @@ def interpret(ast):
 
             return holder
 
+        # Modulo
         elif ast[1] == "%":
             pos = 2
             holder_arr = []
@@ -66,6 +91,7 @@ def interpret(ast):
 
 
             return holder_arr[0] % holder_arr[1]
+    ## Declaring variables
     elif ast[1] == "DEC":
         try:
             if ast[2].isalpha() and ast[2] != "end":
@@ -85,18 +111,18 @@ def interpret(ast):
 
             return variables[ast[2]]
         except:
-            print("ERROR unexpected EOF")
+            error(0, "final")
             exit()
 
 
-            
-        
-        
-def start_interpreter(ast):
+             
+def start_interpreter(ast, dict_vars):
     i = 0
+    variables = dict_vars
     while i < len(ast):
+        # For nested brackets, handle nested brackets first
         if type(ast[i]) == list:
-            res = start_interpreter(ast[i])
+            res = start_interpreter(ast[i], variables)
             ast[i] = res
 
         i += 1

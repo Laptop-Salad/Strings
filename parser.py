@@ -1,8 +1,9 @@
- # Stiallan Parser
+### Stiallan Parser
 
-# TOKENS
+## TOKENS
 operator_tokens = ["PLUS", "MINUS", "MULTIPLY", "DIVIDE", "MODULO"]
 
+## Handles the inner brackets if there are any
 def inner_bracket(pos, tokens, ast):
     holder = []
     holder.append("start")
@@ -26,7 +27,7 @@ def inner_bracket(pos, tokens, ast):
 
     return pos, holder
 
-# Functions
+## Handles the outside bracket
 def bracket(pos, tokens):
     ast = []
     pos += 1

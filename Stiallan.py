@@ -13,6 +13,8 @@ print("""
 Type exit to exit
 """)
 
+variables = interpreter.variables
+
 while True:
     code = input("> ")
 
@@ -27,5 +29,6 @@ while True:
     else:
         ast = parser.bracket(pos, sc_tokens)
 
-    print(interpreter.start_interpreter(ast))
+    print(interpreter.start_interpreter(ast, variables))
+    variables = interpreter.variables
     
