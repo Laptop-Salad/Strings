@@ -1,8 +1,8 @@
 # Stiallan
-A toy programming language
+An interpreted toy language that is written in Python and is dynamically typed.
 
 ## Syntax
-The syntax is similar to Lisp - Scheme but has its differences.
+The syntax is similar to Scheme but has its differences.
 
 All code should be enclosed in brackets.
 
