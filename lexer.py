@@ -22,7 +22,7 @@ types = {
 }
 
 
-## Tokenizes input
+## Takes input code and returns an array of Tokens
 def tokenize(code):
     i = 0
     sc_tokens = []
@@ -44,8 +44,9 @@ def tokenize(code):
                 while code[i].isnumeric(): ## If more than 1 number, ex 22
                     holder.append(code[i])
                     i += 1
-                    
-                sc_tokens.append(Token("NUMBER", ''.join(holder), i))
+                
+                numbers = int(''.join(holder)) 
+                sc_tokens.append(Token("NUMBER", numbers, i))
 
             # Letters
             elif code[i].isalpha():

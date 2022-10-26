@@ -1,19 +1,12 @@
 ### Stiallan Parser
 
-## TOKENS
-operator_tokens = ["PLUS", "MINUS", "MULTIPLY", "DIVIDE", "MODULO"]
-
 ## Handles the inner brackets if there are any
 def inner_bracket(pos, tokens, ast):
     holder = []
     holder.append("start")
     pos += 1
     while tokens[pos].typ != "RBRACKET":
-        if tokens[pos].text.isnumeric():
-            tokens[pos].text = int(tokens[pos].text)
-            holder.append(tokens[pos].text)
-            pos += 1
-        elif tokens[pos].typ == "LBRACKET":
+        if tokens[pos].typ == "LBRACKET":
             result = inner_bracket(pos, tokens, ast)
             pos = result[0]
             holder.append(result[1])
@@ -22,7 +15,7 @@ def inner_bracket(pos, tokens, ast):
             pos += 1
 
 
-    holder.append("end")
+    holder.append("LBRACKET")
     pos += 1
 
     return pos, holder
@@ -34,15 +27,7 @@ def bracket(pos, tokens):
     ast.append("start")
 
     while pos < len(tokens):
-        if tokens[pos].text.isnumeric():
-            tokens[pos].text = int(tokens[pos].text)
-            ast.append(tokens[pos].text)
-            pos += 1
-        elif tokens[pos].typ == "RBRACKET":
-            tokens[pos].text = "end"
-            ast.append(tokens[pos].text)
-            pos += 1
-        elif tokens[pos].typ == "LBRACKET":
+        if tokens[pos].typ == "LBRACKET":
             result = inner_bracket(pos, tokens, ast)
             pos = result[0]
             ast.append(result[1])

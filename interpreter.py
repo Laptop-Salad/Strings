@@ -2,6 +2,7 @@
 from helpers import *
 
 variables = {}
+operators = ["+", "-", "*", "/", "%"]
 
 ## Search through ast and replace variables with its values
 def lookup_vars(ast):
@@ -16,7 +17,7 @@ def lookup_vars(ast):
 ## Interprets a single bracket
 def interpret(ast):
     ## For calculations
-    if ast[1] in operators
+    if ast[1] in operators:
         ast = lookup_vars(ast) # Check for variables
 
         # Addition
@@ -94,7 +95,7 @@ def interpret(ast):
     ## Declaring variables
     elif ast[1] == "DEC":
         try:
-            if ast[2].isalpha() and ast[2] != "end":
+            if ast[2].isalpha() and ast[2] != "RBRACKET":
                 variables[ast[2]] = "NULL"
                 if ast[3] == "AS":
                     if type(ast[4]) == int:
