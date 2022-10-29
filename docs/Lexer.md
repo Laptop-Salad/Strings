@@ -23,7 +23,7 @@ Currently Stiallan only has one data type, integer. The next data type to be add
 
 ## The Source Code
 
-## `Token`
+### `Token`
 Takes in three arguments:
 - `typ` : The name of the Token.
 - `text` : The original section of code/text.
@@ -31,9 +31,9 @@ Takes in three arguments:
 
 Used to instantiate a Token. Is used in the `tokenize` function.
 
-## `types`
+### `types`
 Holds some token types that require a specific character, e.g. a plus symbol. 
-##  `tokenize(code)`
+###  `tokenize(code)`
 Takes in a single argument`code`, a single line of code entered by the user. This function is called from the main file`Stiallan.py`. It takes a single line of code and returns an array of`Token`.
-## `sc_tokens`
+### `sc_tokens`
 Is an array and is short for "source code tokens". Is the array of Tokens returned by the tokenize function.
