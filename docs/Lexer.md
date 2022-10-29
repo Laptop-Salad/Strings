@@ -1,4 +1,4 @@
-#Lexical Analyser
+# Lexical Analyser
 The first phase of an interpreter. The lexer or lexical analyser takes a line of code and translates it into tokens. .
 
 ## Tokens
