@@ -1,6 +1,8 @@
 # Stiallan
 An interpreted toy language that is written in Python and is dynamically typed.
 
+[Installation](docs/Installation.md)
+
 ## Syntax
 The syntax is similar to Scheme but has its differences.
 
