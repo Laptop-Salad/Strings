@@ -50,3 +50,4 @@ Returns 10.
 - [ ]  Conditionals and booleans
 - [ ]  Loops
 - [ ]  Functions
+- [ ]  Accept Files
