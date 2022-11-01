@@ -14,7 +14,7 @@ The first phase of an interpreter. The lexer or lexical analyser takes a line of
 | )  | 5  | ["RBRACKET", "+", 5]   |
 | declare  | 1  | ["DEC", "+", 1]   |
 | as  | 3  | ["AS", "+", 3]   |
-| num_count  | 2  | ["ALPHA", "+",23]   |
+| num_count  | 2  | ["ALPHA", "+",2]   |
 | 24  | 2 | ["NUMBER", "+", 2]  |
 | $ | 1 | ["unknown", "+", 1]  |
 
