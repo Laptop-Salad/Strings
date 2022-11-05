@@ -1,7 +1,20 @@
 ### Stiallan Parser
 
-## Handles the inner brackets if there are any
 def inner_bracket(pos, tokens, ast):
+    """
+    inner_bracket
+
+    Handles the inner brackets if there are any
+
+    Arguments:
+    - `pos`: (int) current position in tokens array.
+    - `tokens`: (arr) array of tokens
+    - `ast`: (arr) abstract syntax tree
+    
+    Returns:
+    - `pos`: (int) current position in tokens array
+    - `holder`: (arr) array of tokens from inner bracket(s)
+    """
     holder = []
     holder.append("start")
     pos += 1
@@ -20,8 +33,19 @@ def inner_bracket(pos, tokens, ast):
 
     return pos, holder
 
-## Handles the outside bracket
 def bracket(pos, tokens):
+    """
+    bracket
+
+    Handles the outside bracket
+
+    Arguments:
+    - `pos`: (int) current position in tokens array.
+    - `tokens`: (arr) array of tokens   
+
+    Returns:
+    - `ast`: (arr) abstract syntax tree
+    """
     ast = []
     pos += 1
     ast.append("start")

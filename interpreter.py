@@ -4,8 +4,18 @@ from helpers import *
 variables = {}
 operators = ["+", "-", "*", "/", "%"]
 
-## Search through ast and replace variables with its values
 def lookup_vars(ast):
+    """
+    lookup_vars
+
+    Search through ast and replace variables with its values
+
+    Arguments:
+    - `ast`: (Arr) abstract syntax tree
+
+    Returns:
+    - `ast`: (Arr) abstract syntax tree
+    """
     i = 0
     while i < len(ast):
         if ast[i] in variables:
@@ -14,11 +24,20 @@ def lookup_vars(ast):
 
     return ast
 
-## Interprets a single bracket
+
 def interpret(ast):
+    """
+    interpret
+
+    Interprets a single line of code with no nested operations.
+
+    Arguments:
+    - `ast`: (Arr) abstract syntax tree
+    """
     ## For calculations
     if ast[1] in operators:
-        ast = lookup_vars(ast) # Check for variables
+        # Check for variables
+        ast = lookup_vars(ast)
 
         # Addition
         if ast[1] == "+":
@@ -112,12 +131,24 @@ def interpret(ast):
 
             return variables[ast[2]]
         except:
-            error(0, "final")
+            print(error(0, "final"))
             exit()
 
 
              
 def start_interpreter(ast, dict_vars):
+    """
+    start_interpreter
+
+    Takes in a line of code, breaks it down and sets it to interpreter to be interpreted.
+
+    Arguments:
+    - `ast`: (Arr) abstract syntax tree
+    - `dict_vars`: (Dictionary) a dictionary of variables
+
+    Returns:
+    - `res`: Result
+    """
     i = 0
     variables = dict_vars
     while i < len(ast):

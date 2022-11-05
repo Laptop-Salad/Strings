@@ -1,14 +1,25 @@
 ### Stiallan Lexer
 from helpers import error
 
-## Token Class
 class Token:
+    """
+    Token class
+
+    Creates a token object.
+
+    Arguments:
+    - `typ`: (Str) the type of token e.g 'PLUS'
+    - `text`: (Str) the original text of the token e.g. '+'
+    - `start_pos`: (Int) the starting position of the token.
+
+    Returns:
+    Token object with values of 'typ', 'text' and 'start_pos'.
+    """
     def __init__(self, typ, text, start_pos):
         self.typ = typ
         self.text = text
         self.start_pos = start_pos
 
-## Token types
 types = {
     "+" : "PLUS",
     "-" : "MINUS",
@@ -22,8 +33,19 @@ types = {
 }
 
 
-## Takes input code and returns an array of Tokens
+
 def tokenize(code):
+    """
+    tokenize function
+
+    Takes a line of code and returns an array of token objects.
+
+    Arguments:
+    - `code`: (Str) a single line of code
+
+    Returns:
+    Array of Token
+    """
     i = 0
     sc_tokens = []
     try:
@@ -66,7 +88,7 @@ def tokenize(code):
                 i += 1
     except:
         # If code ends unexpectedly
-        error(0, i-1)
+        print(error(0, i-1))
         
 
     
