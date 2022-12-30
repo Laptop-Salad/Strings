@@ -4,7 +4,7 @@ from helpers import *
 variables = {}
 operators = ["+", "-", "*", "/", "%"]
 
-def lookup_vars(ast):
+def lookup_vars(ast, variables):
     """
     lookup_vars
 
@@ -25,7 +25,7 @@ def lookup_vars(ast):
     return ast
 
 
-def interpret(ast):
+def interpret(ast, variables):
     """
     interpret
 
@@ -37,7 +37,7 @@ def interpret(ast):
     ## For calculations
     if ast[1] in operators:
         # Check for variables
-        ast = lookup_vars(ast)
+        ast = lookup_vars(ast, variables)
 
         # Addition
         if ast[1] == "+":
@@ -159,11 +159,7 @@ def start_interpreter(ast, dict_vars):
 
         i += 1
 
-    res = interpret(ast)
+    res = interpret(ast, variables)
     return res
-            
-
-
-
 
     
