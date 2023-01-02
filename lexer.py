@@ -88,9 +88,7 @@ def tokenize(code):
                 i += 1
     except:
         # If code ends unexpectedly
-        print(error(0, i-1))
-        
-
+        return error(0, i-1)
     
     sc_tokens.append(Token("EOF", "EOF", i)) # Add EOF token to mark end
     return sc_tokens

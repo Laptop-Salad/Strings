@@ -13,22 +13,35 @@ print("""
 Type exit to exit
 """)
 
-variables = interpreter.variables
-
-while True:
-    code = input("> ")
-
-    if code.lower() == "exit":
-        break
-    
-    sc_tokens = tokenize(code)
-    pos = 0
-    
-    if sc_tokens[pos].typ != "LBRACKET":
-        print("ERROR at position", pos, "expected ( but got", sc_tokens[pos].text)
-    else:
-        ast = parser.bracket(pos, sc_tokens)
-
-    print(interpreter.start_interpreter(ast, variables))
+def main():
     variables = interpreter.variables
+    
+    while True:
+        code = input("> ")
+
+        if code.lower() == "exit":
+            return 0
+        
+        sc_tokens = tokenize(code)
+
+        if type(sc_tokens) != list:
+            print(sc_tokens)
+            return 1
+        
+        pos = 0
+        
+        if sc_tokens[pos].typ != "LBRACKET":
+            print("ERROR at position", pos, "expected ( but got", sc_tokens[pos].text)
+            return 1
+
+        ast = parser.bracket(pos, sc_tokens)
+        print(ast)
+
+        print(interpreter.start_interpreter(ast, variables))
+        variables = interpreter.variables
+
+start = main()
+
+while start != 0:
+    start = main()
     

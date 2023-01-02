@@ -4,6 +4,14 @@ from helpers import *
 variables = {}
 operators = ["+", "-", "*", "/", "%"]
 
+def check_unmatched(ast):
+    ast_string = ''.join(str(ast))
+    if ast_string.count('LBRACKET') != ast_string.count('RBRACKET'):
+        return True
+
+    return False
+    
+
 def lookup_vars(ast, variables):
     """
     lookup_vars
@@ -151,13 +159,21 @@ def start_interpreter(ast, dict_vars):
     """
     i = 0
     variables = dict_vars
+
+
     while i < len(ast):
         # For nested brackets, handle nested brackets first
         if type(ast[i]) == list:
+            if check_unmatched(ast[i]):
+                return error(0, len(ast)-1)
+            
             res = start_interpreter(ast[i], variables)
             ast[i] = res
 
         i += 1
+
+    if check_unmatched(ast):
+        return error(0, len(ast)-1)
 
     res = interpret(ast, variables)
     return res
