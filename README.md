@@ -47,6 +47,7 @@ Returns 10.
 - [x]  Nested math operations
 - [x]  Variables
 - [x]  Creating variables as a string
+- [ ]  Error system
 - [ ]  Printing strings
 - [ ]  Conditionals and booleans
 - [ ]  Loops
