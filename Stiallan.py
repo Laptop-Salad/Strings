@@ -14,6 +14,12 @@ Type exit to exit
 """)
 
 def main():
+    """
+    main
+
+    Gets input from user and puts it through the lexer, parser and interpreter. The main function keeps track of variables the
+    user declares until a user types "exit".
+    """
     variables = interpreter.variables
     
     while True:
@@ -28,13 +34,13 @@ def main():
             print(sc_tokens)
             return 1
         
-        pos = 0
+        pointer = 0
         
-        if sc_tokens[pos].typ != "LBRACKET":
-            print("ERROR at position", pos, "expected ( but got", sc_tokens[pos].text)
+        if sc_tokens[pointer].typ != "LBRACKET":
+            print("ERROR at pointerition", pointer, "expected ( but got", sc_tokens[pointer].text)
             return 1
 
-        ast = s_parser.bracket(pos, sc_tokens)
+        ast = s_parser.bracket(pointer, sc_tokens)
 
         print(interpreter.start_interpreter(ast, variables))
         variables = interpreter.variables

@@ -4,7 +4,7 @@ def error(error_code, pos):
     """
     error
 
-    This function prints out an error message based on the given error code."
+    This function prints out an error message based on the given error code.
 
     # Arguments:
     - `error_code`: An integer that identifies the type of error.

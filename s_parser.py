@@ -1,69 +1,69 @@
 ### Stiallan Parser
 
-def inner_bracket(pos, tokens, ast):
+def inner_bracket(pointer, tokens, ast):
     """
     inner_bracket
 
     Handles the inner brackets if there are any
 
     Arguments:
-    - `pos`: (int) current position in tokens array.
-    - `tokens`: (arr) array of tokens
-    - `ast`: (arr) abstract syntax tree
+    - `pointer`: (int) current pointerition in tokens.
+    - `tokens`: (List) List of tokens
+    - `ast`: (List) abstract syntax tree
     
     Returns:
-    - `pos`: (int) current position in tokens array
-    - `holder`: (arr) array of tokens from inner bracket(s)
+    - `pointer`: (int) current pointerition in tokens
+    - `holder`: (List) List of tokens from inner bracket(s)
     """
     holder = []
     holder.append("RBRACKET")
-    pos += 1
-    while tokens[pos].typ != "RBRACKET":
-        if tokens[pos].typ == "LBRACKET":
-            result = inner_bracket(pos, tokens, ast)
-            pos = result[0]
+    pointer += 1
+    while tokens[pointer].typ != "RBRACKET":
+        if tokens[pointer].typ == "LBRACKET":
+            result = inner_bracket(pointer, tokens, ast)
+            pointer = result[0]
             holder.append(result[1])
         else:
-            holder.append(tokens[pos].text)
-            pos += 1
+            holder.append(tokens[pointer].text)
+            pointer += 1
 
 
     holder.append("LBRACKET")
-    pos += 1
+    pointer += 1
 
-    return pos, holder
+    return pointer, holder
 
-def bracket(pos, tokens):
+def bracket(pointer, tokens):
     """
     bracket
 
     Handles the outside bracket
 
     Arguments:
-    - `pos`: (int) current position in tokens array.
-    - `tokens`: (arr) array of tokens   
+    - `pointer`: (int) current pointerition in tokens.
+    - `tokens`: (List) of tokens   
 
     Returns:
-    - `ast`: (arr) abstract syntax tree
+    - `ast`: (List) abstract syntax tree
     """
     ast = []
-    pos += 1
+    pointer += 1
     ast.append("start")
 
-    while pos < len(tokens):
-        if tokens[pos].typ == "LBRACKET":
-            result = inner_bracket(pos, tokens, ast)
-            pos = result[0]
+    while pointer < len(tokens):
+        if tokens[pointer].typ == "LBRACKET":
+            result = inner_bracket(pointer, tokens, ast)
+            pointer = result[0]
             ast.append(result[1])
-        elif tokens[pos].typ == "DEC":
-            ast.append(tokens[pos].typ)
-            pos += 1
-        elif tokens[pos].typ == "AS":
-            ast.append(tokens[pos].typ)
-            pos += 1
+        elif tokens[pointer].typ == "DEC":
+            ast.append(tokens[pointer].typ)
+            pointer += 1
+        elif tokens[pointer].typ == "AS":
+            ast.append(tokens[pointer].typ)
+            pointer += 1
         else:
-            ast.append(tokens[pos].text)
-            pos += 1
+            ast.append(tokens[pointer].text)
+            pointer += 1
             
 
     return ast
