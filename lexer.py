@@ -63,16 +63,34 @@ def tokenize(code):
             # Handle Numbers
             elif code[pointer].isnumeric():
                 holder = []
-                while code[pointer].isnumeric(): ## If more than 1 number, ex 22
+                
+                
+                # If more than 1 number, ex 22
+                while code[pointer].isnumeric():
+                    holder.append(code[pointer])
+                    pointer += 1
+                     
+                numbers = int(''.join(holder)) 
+                sc_tokens.append(Token("NUMBER", numbers, pointer))
+                
+            elif code[pointer] == "\"":
+                holder = []
+                
+                pointer += 1
+
+                while code[pointer] != "\"":
                     holder.append(code[pointer])
                     pointer += 1
                 
-                numbers = int(''.join(holder)) 
-                sc_tokens.append(Token("NUMBER", numbers, pointer))
+                pointer += 1    
+                
+                joined = ''.join(holder)
+                sc_tokens.append(Token("STRING", joined, pointer))
 
             # Handle Letters
             elif code[pointer].isalpha():
                 holder = []
+
                 while code[pointer].isalpha():
                     holder.append(code[pointer])
                     pointer += 1

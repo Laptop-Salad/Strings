@@ -31,17 +31,16 @@ def main():
         sc_tokens = tokenize(code)
 
         if type(sc_tokens) != list:
-            print(sc_tokens)
             return 1
         
         pointer = 0
         
         if sc_tokens[pointer].typ != "LBRACKET":
-            print("ERROR at pointerition", pointer, "expected ( but got", sc_tokens[pointer].text)
+            print("ERROR at position", pointer, "expected ( but got", sc_tokens[pointer].text)
             return 1
 
         ast = s_parser.bracket(pointer, sc_tokens)
-
+        
         print(interpreter.start_interpreter(ast, variables))
         variables = interpreter.variables
 

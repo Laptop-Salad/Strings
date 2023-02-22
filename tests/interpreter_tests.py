@@ -12,46 +12,28 @@ def run_code(code, variables={}):
     result = start_interpreter(ast, variables)
     return result
 
-class TestMath(unittest.TestCase):
-    # Addition 
+class TestMath(unittest.TestCase):       
     def test_addition(self):
-        result = run_code("(+ 5 5)")
-        expected = 10
-        self.assertEqual(result, expected)
+        self.assertEqual(run_code("(+ 5 5)"), 10)
+        self.assertEqual(run_code("(+ 10 5 4 3)"), 22)
 
-    # Subtraction
     def test_subtraction(self):
-        result = run_code("(- 5 5)")
-        expected = 0
-        self.assertEqual(result, expected)
+        self.assertEqual(run_code("(- 5 5)"), 0)
+        self.assertEqual(run_code("(- 20 10 5 6)"), -1)
 
-    # Multiplication
     def test_multiplication(self):
-        result = run_code("(* 5 5)")
-        expected = 25
-        self.assertEqual(result, expected)
+        self.assertEqual(run_code("(* 5 5)"), 25)
 
-    # Division
     def test_division(self):
-        result = run_code("(/ 100 2)")
-        expected = 50
-        self.assertEqual(result, expected)
+        self.assertEqual(run_code("(/ 100 2)"), 50)
 
-    # Nested calculations
     def test_nested(self):
-        result = run_code("(+ 10 (- 10 5) 8)")
-        expected = 23
-        self.assertEqual(result, expected)
-
-    # Declaring variables
+        self.assertEqual(run_code("(+ 10 (- 10 5) 8)"), 23)
+        
     def test_declare_variable(self):
-        result = run_code("(declare x as 6)")
-        expected = 6
-        self.assertEqual(result, expected)
-
-    # Calculation using variable
-    def test_addition_variable(self):
-        result = run_code("(+ x x)", {"x": 5})
-        expected = 10
-        self.assertEqual(result, expected)
+        self.assertEqual(run_code("(declare x as 6)"), 6)
+        self.assertEqual(run_code("(+ x x)", {"x": 5}), 10)
+        self.assertEqual(run_code("(declare name as \"Laptop-Salad\")"), "Laptop-Salad")
+        self.assertEqual(run_code("(declare x as \"Hello World\")"), "Hello World")
+        self.assertEqual(run_code("(declare x as )"), "ERROR expected variable name after AS but got )")
 

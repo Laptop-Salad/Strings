@@ -38,9 +38,13 @@ def lookup_vars(ast, variables):
     """
     i = 0
     while i < len(ast):
-        if ast[i] in variables:
-            ast[i] = variables[ast[i]]
-        i += 1
+        try:
+            if ast[i] in variables:
+                ast[i] = variables[ast[i]]
+            i += 1
+        except:
+            i += 1
+            continue
 
     return ast
 
@@ -151,8 +155,8 @@ def interpret(ast, variables):
             while type(ast[pointer]) == int or type(ast[pointer]) == float:
                 # Ensure MOD is only used on two integers
                 if pointer > 4:
-                    print("ERROR cannot use MOD on a third number")
-                    exit()
+                    error_message = "ERROR cannot use MOD on a third number"
+                    return 1, error_message
                 else:
                     holder_arr.append(ast[pointer])
                     pointer += 1
@@ -172,20 +176,27 @@ def interpret(ast, variables):
                     # The fourth token should be the value to map to the variable
                     if type(ast[4]) == int:
                         variables[ast[2]] = ast[4]
+
+                    # Handle string variables
+                    elif type(ast[4]) == str and ast[4] != ")":
+                        pointer = 5
+                        holder = []
+
+                        variables[ast[2]] = ast[4]
                     else:
-                        print("ERROR expected variable name after AS but got", ast[4])
-                        exit()
+                        error_message = "ERROR expected variable name after AS but got" + ' ' + str(ast[4])
+                        return 1, error_message
                 else:
                     print(ast[3])
                     
             else:
-                print("ERROR expected variable name after DECLARE but got", ast[2])
-                exit()
+                error_message = "ERROR expected variable name after DECLARE but got" + ' ' + str(ast[2])
+                return 1, error_message
 
             return variables[ast[2]]
         except:
-            print(error(0, "final"))
-            exit()
+            error_message = "Unexpected end of line"
+            return 1, error_message
 
 
              
@@ -222,4 +233,11 @@ def start_interpreter(ast, dict_vars):
     
     # If there are no nested brackets left, interpreted the whole ast
     res = interpret(ast, variables)
+    
+    try:
+        if res[0] == 1:
+            return res[1]
+    except:
+        pass
+    
     return res
