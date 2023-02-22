@@ -46,7 +46,8 @@ Returns 10.
 - [x]  Basic math operations
 - [x]  Nested math operations
 - [x]  Variables
-- [ ]  Strings
+- [x]  Creating variables as a string
+- [ ]  Printing strings
 - [ ]  Conditionals and booleans
 - [ ]  Loops
 - [ ]  Functions

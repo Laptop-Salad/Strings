@@ -14,12 +14,25 @@ The first phase of an interpreter. The lexer or lexical analyser takes a line of
 | )  | 5  | ["RBRACKET", "+", 5]   |
 | declare  | 1  | ["DEC", "+", 1]   |
 | as  | 3  | ["AS", "+", 3]   |
-| num_count  | 2  | ["ALPHA", "+",2]   |
+| num_count  | 2  | ["ALPHA", "+", 2]   |
 | 24  | 2 | ["NUMBER", "+", 2]  |
+| "hello world" | 13 | ["STRING", "hello world", 13] |
 | $ | 1 | ["unknown", "+", 1]  |
 
 ## Data Types
-Currently Stiallan only has one data type, integer. The next data type to be added is String.
+Currently Stiallan only has one two types, integer and string.
+
+Declare integers
+```
+> (declare x as 5)
+> 5
+```
+
+Declare strings
+```
+> (declare message as "Hello World")
+> Hello World
+```
 
 ## The Source Code
 
