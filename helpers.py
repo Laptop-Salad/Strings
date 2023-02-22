@@ -13,10 +13,10 @@ def error(error_code, pos):
     # Returns:
     - String `error_message`
     """
-    
-    errors = [
-        "Unexpected end of line",
-    ]
+
+    errors = {
+        0 : "Unexpected end of line",
+    }
     
     error_message = "ERROR at position {position} : {error}".format(position=pos,error=errors[error_code])
     return error_message
