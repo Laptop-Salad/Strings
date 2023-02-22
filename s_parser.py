@@ -16,7 +16,7 @@ def inner_bracket(pos, tokens, ast):
     - `holder`: (arr) array of tokens from inner bracket(s)
     """
     holder = []
-    holder.append("start")
+    holder.append("RBRACKET")
     pos += 1
     while tokens[pos].typ != "RBRACKET":
         if tokens[pos].typ == "LBRACKET":

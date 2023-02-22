@@ -3,7 +3,7 @@ import sys
 
 sys.path.append('../')
 from interpreter import start_interpreter, lookup_vars
-from parser import bracket
+from s_parser import bracket
 from lexer import tokenize
 
 def run_code(code, variables={}):
@@ -38,7 +38,7 @@ class TestMath(unittest.TestCase):
         self.assertEqual(result, expected)
 
     # Nested calculations
-    def test_division(self):
+    def test_nested(self):
         result = run_code("(+ 10 (- 10 5) 8)")
         expected = 23
         self.assertEqual(result, expected)

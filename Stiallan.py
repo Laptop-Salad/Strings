@@ -1,6 +1,6 @@
 # Stiallan
 from lexer import tokenize
-import parser
+import s_parser
 import interpreter
 
 print("""
@@ -34,8 +34,7 @@ def main():
             print("ERROR at position", pos, "expected ( but got", sc_tokens[pos].text)
             return 1
 
-        ast = parser.bracket(pos, sc_tokens)
-        print(ast)
+        ast = s_parser.bracket(pos, sc_tokens)
 
         print(interpreter.start_interpreter(ast, variables))
         variables = interpreter.variables
