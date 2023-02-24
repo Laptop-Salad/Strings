@@ -74,12 +74,14 @@ def tokenize(code):
             elif code[pointer] == "\"":
                 holder = []
                 
+                holder.append("\"")
                 pointer += 1
 
                 while code[pointer] != "\"":
                     holder.append(code[pointer])
                     pointer += 1
                 
+                holder.append("\"")
                 pointer += 1    
                 
                 joined = ''.join(holder)

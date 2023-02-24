@@ -116,8 +116,8 @@ def interpret(ast, variables):
                 if type(ast[4]) == int:
                     variables[ast[2]] = ast[4]
                     return variables[ast[2]]
-                elif type(ast[4]) == str:
-                    variables[ast[2]] = ast[4]
+                elif type(ast[4]) == str and ast[4].startswith("\""):
+                    variables[ast[2]] = ast[4].replace("\"", "")
                     return variables[ast[2]]
             else:
                 return 1, err.expected_error(3, "'AS'", "'" + str(ast[3]) + "'")
