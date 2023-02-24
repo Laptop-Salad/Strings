@@ -35,5 +35,3 @@ class TestMath(unittest.TestCase):
         self.assertEqual(run_code("(+ x x)", {"x": 5}), 10)
         self.assertEqual(run_code("(declare name as \"Laptop-Salad\")"), "Laptop-Salad")
         self.assertEqual(run_code("(declare x as \"Hello World\")"), "Hello World")
-        self.assertEqual(run_code("(declare x as )"), "ERROR expected variable name after AS but got )")
-

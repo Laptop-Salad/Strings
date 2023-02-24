@@ -1,5 +1,4 @@
-### Stiallan Lexer
-from helpers import error
+## Stiallan Lexer
 
 class Token:
     """
@@ -64,7 +63,6 @@ def tokenize(code):
             elif code[pointer].isnumeric():
                 holder = []
                 
-                
                 # If more than 1 number, ex 22
                 while code[pointer].isnumeric():
                     holder.append(code[pointer])
@@ -106,8 +104,7 @@ def tokenize(code):
                 sc_tokens.append(Token("unknown", code[pointer], pointer))
                 pointer += 1
     except:
-        # If code ends unexpectedly
-        return error(0, pointer-1)
+        return 1
     
     # Add EOF token to mark end
     sc_tokens.append(Token("EOF", "EOF", pointer))

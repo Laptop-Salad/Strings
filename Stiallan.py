@@ -34,14 +34,14 @@ def main():
             return 1
         
         pointer = 0
-        
-        if sc_tokens[pointer].typ != "LBRACKET":
-            print("ERROR at position", pointer, "expected ( but got", sc_tokens[pointer].text)
-            return 1
 
         ast = s_parser.bracket(pointer, sc_tokens)
         
-        print(interpreter.start_interpreter(ast, variables))
+        res = interpreter.start_interpreter(ast, variables)
+        
+        if res != "ERROR Occured":
+            print(res)
+            
         variables = interpreter.variables
 
 start = main()

@@ -1,4 +1,4 @@
-### Stiallan Parser
+## Stiallan Parser
 
 def inner_bracket(pointer, tokens, ast):
     """
@@ -16,7 +16,8 @@ def inner_bracket(pointer, tokens, ast):
     - `holder`: (List) List of tokens from inner bracket(s)
     """
     holder = []
-    holder.append("RBRACKET")
+    holder.append("LBRACKET")
+    
     pointer += 1
     while tokens[pointer].typ != "RBRACKET":
         if tokens[pointer].typ == "LBRACKET":
@@ -28,7 +29,7 @@ def inner_bracket(pointer, tokens, ast):
             pointer += 1
 
 
-    holder.append("LBRACKET")
+    holder.append("RBRACKET")
     pointer += 1
 
     return pointer, holder
@@ -48,13 +49,16 @@ def bracket(pointer, tokens):
     """
     ast = []
     pointer += 1
-    ast.append("start")
+    ast.append("LBRACKET")
 
     while pointer < len(tokens):
         if tokens[pointer].typ == "LBRACKET":
             result = inner_bracket(pointer, tokens, ast)
             pointer = result[0]
             ast.append(result[1])
+        elif tokens[pointer].typ == "RBRACKET":
+            ast.append("RBRACKET")
+            pointer += 1
         elif tokens[pointer].typ == "DEC":
             ast.append(tokens[pointer].typ)
             pointer += 1
