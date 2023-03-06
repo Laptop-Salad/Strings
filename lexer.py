@@ -14,22 +14,19 @@ class Token:
     Returns:
     Token object with values of 'typ', 'text' and 'start_pos'.
     """
-    def __init__(self, typ, text, start_pos):
+    def __init__(self, typ, txt):
         self.typ = typ
-        self.text = text
-        self.start_pos = start_pos
+        self.txt = txt
 
 
 types = {
-    "+" : "PLUS",
-    "-" : "MINUS",
-    "*" : "MULTIPLY",
-    "/" : "DIVIDE",
-    "%" : "MODULO",
-    "("     : "LBRACKET",
-    ")"     : "RBRACKET",
-    "declare": "DEC",
-    "as": "AS",
+    "+" : "OP:PLUS",
+    "-" : "OP:MINUS",
+    "*" : "OP:MULT",
+    "/" : "OP:DIV",
+    "%" : "OP:MOD",
+    "("     : "START",
+    ")"     : "END",
 }
 
 
@@ -56,7 +53,7 @@ def tokenize(code):
 
             # Handle Keywords, found in 'types' variable
             elif code[pointer] in types:
-                sc_tokens.append(Token(types[code[pointer]], code[pointer], pointer))
+                sc_tokens.append(Token(types[code[pointer]], code[pointer]))
                 pointer += 1
 
             # Handle Numbers
@@ -69,45 +66,15 @@ def tokenize(code):
                     pointer += 1
                      
                 numbers = int(''.join(holder)) 
-                sc_tokens.append(Token("NUMBER", numbers, pointer))
-                
-            elif code[pointer] == "\"":
-                holder = []
-                
-                holder.append("\"")
-                pointer += 1
-
-                while code[pointer] != "\"":
-                    holder.append(code[pointer])
-                    pointer += 1
-                
-                holder.append("\"")
-                pointer += 1    
-                
-                joined = ''.join(holder)
-                sc_tokens.append(Token("STRING", joined, pointer))
-
-            # Handle Letters
-            elif code[pointer].isalpha():
-                holder = []
-
-                while code[pointer].isalpha():
-                    holder.append(code[pointer])
-                    pointer += 1
-                
-                joined = ''.join(holder)
-                if joined in types:
-                    sc_tokens.append(Token(types[joined], joined, pointer))
-                else:
-                    sc_tokens.append(Token("ALPHA", joined, pointer))
+                sc_tokens.append(Token("INT", numbers))
             
             # If character is not a letter, number or keyword it is unkown
             else:
-                sc_tokens.append(Token("unknown", code[pointer], pointer))
+                sc_tokens.append(Token("unknown", code[pointer]))
                 pointer += 1
     except:
         return 1
     
     # Add EOF token to mark end
-    sc_tokens.append(Token("EOF", "EOF", pointer))
+    sc_tokens.append(Token("EOF", ""))
     return sc_tokens

@@ -20,7 +20,7 @@ def main():
     Gets input from user and puts it through the lexer, parser and interpreter. The main function keeps track of variables the
     user declares until a user types "exit".
     """
-    variables = interpreter.variables
+    #variables = interpreter.variables
     
     while True:
         code = input("> ")
@@ -30,22 +30,11 @@ def main():
         
         sc_tokens = tokenize(code)
 
-        if type(sc_tokens) != list:
-            return 1
+        ast = s_parser.start_parser(sc_tokens)
         
-        pointer = 0
-
-        ast = s_parser.bracket(pointer, sc_tokens)
-        
-        res = interpreter.start_interpreter(ast, variables)
-        
-        if res != "ERROR Occured":
-            print(res)
-            
-        variables = interpreter.variables
+        res = interpreter.start_interpreter(ast)
 
 start = main()
 
 while start != 0:
     start = main()
-    
