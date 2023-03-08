@@ -20,7 +20,6 @@ def main():
     Gets input from user and puts it through the lexer, parser and interpreter. The main function keeps track of variables the
     user declares until a user types "exit".
     """
-    #variables = interpreter.variables
     
     while True:
         code = input("> ")
@@ -33,6 +32,8 @@ def main():
         ast = s_parser.start_parser(sc_tokens)
         
         res = interpreter.start_interpreter(ast)
+        
+        print(res)
 
 start = main()
 

@@ -2,14 +2,14 @@ import unittest
 import sys
 
 sys.path.append('../')
-from interpreter import start_interpreter, lookup_vars
-from s_parser import bracket
+from interpreter import start_interpreter
+from s_parser import start_parser
 from lexer import tokenize
 
 def run_code(code, variables={}):
     sc_tokens = tokenize(code)
-    ast = bracket(0, sc_tokens)
-    result = start_interpreter(ast, variables)
+    ast = start_parser(sc_tokens)
+    result = start_interpreter(ast)
     return result
 
 class TestMath(unittest.TestCase):       
@@ -29,9 +29,3 @@ class TestMath(unittest.TestCase):
 
     def test_nested(self):
         self.assertEqual(run_code("(+ 10 (- 10 5) 8)"), 23)
-        
-    def test_declare_variable(self):
-        self.assertEqual(run_code("(declare x as 6)"), 6)
-        self.assertEqual(run_code("(+ x x)", {"x": 5}), 10)
-        self.assertEqual(run_code("(declare name as \"Laptop-Salad\")"), "Laptop-Salad")
-        self.assertEqual(run_code("(declare x as \"Hello World\")"), "Hello World")

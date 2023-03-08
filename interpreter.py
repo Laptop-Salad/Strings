@@ -21,6 +21,7 @@ def handle_operation(current_node):
                 
                 current_node.left = Node(
                     Token("INT", inner_result),
+                    current_node,
                     holder
                 )
         
@@ -65,5 +66,5 @@ def start_interpreter(head_node):
     
     res = find_start(head_node)
     
-    print(res)
+    return res
         
