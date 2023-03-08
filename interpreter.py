@@ -62,7 +62,7 @@ def find_start(head_node):
     token to handle_operation, and returns the result.
 
     Args:
-        head_node (Node): the first node in the AST (linked list)
+        head_node (Node): the first node in the AST
 
     Returns:
         the result on an operation.
@@ -90,7 +90,7 @@ def start_interpreter(head_node):
     Starts the process of interpreting line of code, is called by outside functions.
 
     Args:
-        head_node (Node): the first node in the AST (linked list)
+        head_node (Node): the first node in the AST
 
     Returns:
         result of line of code

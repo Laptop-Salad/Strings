@@ -17,7 +17,7 @@ def start_parser(sc_tokens):
         sc_tokens (list): A list of tokens from the lexer.
 
     Returns:
-        Node: Returns the head node of the AST (linked list)
+        Node: Returns the head node of the AST
     """
     head_node = None
     current_node = None
