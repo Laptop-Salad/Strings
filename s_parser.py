@@ -7,56 +7,23 @@ class Node:
         self.right = right
         self.prev = prev
 
-def traverse_left(current_node, prefix=None):
-    while current_node is not None:
-        if prefix is not None:
-            print(prefix, "LEFT:", current_node.token.typ, current_node.token.txt)
-        else:
-            print("LEFT:", current_node.token.typ, current_node.token.txt)
-        
-        if current_node.right is not None:
-            current_node = traverse_right(current_node.right, "LEFT")
-            
-            if current_node is None:
-                return
-            
-            current_node = current_node.left
-            
-        current_node = current_node.left
-        
-    return current_node
-
-def traverse_right(current_node, prefix=None):
-    while current_node is not None:
-        if prefix is not None:
-            print(prefix, "RIGHT:", current_node.token.typ, current_node.token.txt)
-        else:
-            print("RIGHT:", current_node.token.typ, current_node.token.txt)
-        
-        if current_node.left is not None:
-            current_node = traverse_left(current_node.left, "RIGHT")
-            
-            if current_node is None:
-                return
-            
-            current_node = current_node.right
-            
-        current_node = current_node.right
-    
-    return current_node
-        
-def traverse_ast(head_node):
-    if head_node is None:
-        return
-    
-    current_node = head_node
-    
-    traverse_left(current_node)
-
 def start_parser(sc_tokens):
+    """
+    start_parser
+    
+    Creates an AST - abstract syntax tree.
+
+    Args:
+        sc_tokens (list): A list of tokens from the lexer.
+
+    Returns:
+        Node: Returns the head node of the AST (linked list)
+    """
     head_node = None
     current_node = None
     
+    # After adding a nested statement, the program needs to move back up the AST to add 
+    # the rest of the statement
     nested_statements = False
     end_count = 0
     
